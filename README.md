@@ -1,4 +1,22 @@
-# nbdev template
+# pyciss
+> Tools for working with Cassini ISS images.
 
-Use this template to more easily create your nbdev project.
+
+## Install
+
+`pip install pyciss2`
+
+## How to use
+
+Fill me in please! Don't forget code examples:
+
+```python
+1+1
+```
+
+
+
+
+    2
+
 
