@@ -2,6 +2,7 @@
   "pyciss2": {
     "Overview": "/",
     "Input/Output basics for the pyciss2 package": "io.html",
+    "OPUSAPI": "opusapi.html",
     "Title": "to_be_implemented.html"
   }
 }

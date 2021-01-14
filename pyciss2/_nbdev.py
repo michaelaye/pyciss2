@@ -10,9 +10,18 @@ index = {"logger": "00_io.ipynb",
          "db_mapped_cubes": "00_io.ipynb",
          "db_label_paths": "00_io.ipynb",
          "PathManager": "00_io.ipynb",
-         "DBManager": "00_io.ipynb"}
+         "DBManager": "00_io.ipynb",
+         "base_url": "01_opusapi.ipynb",
+         "metadata_url": "01_opusapi.ipynb",
+         "image_url": "01_opusapi.ipynb",
+         "dic": "01_opusapi.ipynb",
+         "MetaData": "01_opusapi.ipynb",
+         "OPUSImageURL": "01_opusapi.ipynb",
+         "OPUSObsID": "01_opusapi.ipynb",
+         "OPUS": "01_opusapi.ipynb"}
 
-modules = ["io.py"]
+modules = ["io.py",
+           "opusapi.py"]
 
 doc_url = "https://michaelaye.github.io/pyciss2/"
 
