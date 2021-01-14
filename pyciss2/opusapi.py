@@ -21,7 +21,7 @@ image_url = base_url + "/image/"
 dic = {"raw_data": "coiss_raw", "calibrated_data": "coiss_calib"}
 
 # Cell
-class MetaData(object):
+class MetaData:
     """Receive OPUS Metadata for ISS img_id.
 
     Parameters
@@ -70,7 +70,7 @@ def _get_dataframe_from_meta_dic(meta, attr_name):
     return df
 
 # Cell
-class OPUSImageURL(object):
+class OPUSImageURL:
 
     """Manage URLS from the OPUS response."""
 
@@ -90,7 +90,7 @@ class OPUSImageURL(object):
         return s
 
 # Cell
-class OPUSObsID(object):
+class OPUSObsID:
 
     """Manage observation IDs from OPUS responses."""
 
@@ -150,7 +150,7 @@ class OPUSObsID(object):
         return s
 
 # Cell
-class OPUS(object):
+class OPUS:
 
     """Manage OPUS API requests.
 
