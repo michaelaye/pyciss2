@@ -173,6 +173,227 @@ nb_path: "01_opusapi.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="OPUS-queries">OPUS queries<a class="anchor-link" href="#OPUS-queries"> </a></h2><p>The <code>query_image_id</code> method returns a list for the case of multiple matches, but also stores these results in an attribute inside the <code>api</code> object under <code>obsids</code>:</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">img_id</span> <span class="o">=</span> <span class="s1">&#39;N1875229&#39;</span>
+<span class="n">api</span> <span class="o">=</span> <span class="n">OPUS</span><span class="p">()</span>
+<span class="n">api</span><span class="o">.</span><span class="n">query_image_id</span><span class="p">(</span><span class="n">img_id</span><span class="p">)</span>
+<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">api</span><span class="o">.</span><span class="n">obsids</span><span class="p">)</span> <span class="o">==</span> <span class="mi">6</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Found 6 obsids.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">api</span><span class="o">.</span><span class="n">obsids</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Raw:
+Label:
+https://opus.pds-rings.seti.org/holdings/volumes/COISS_2xxx/COISS_2113/data/1875228144_1875491141/N1875229393_1.LBL
+Image:
+https://opus.pds-rings.seti.org/holdings/volumes/COISS_2xxx/COISS_2113/data/1875228144_1875491141/N1875229393_1.IMG
+Calibrated:
+Label:
+https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2113/data/1875228144_1875491141/N1875229393_1_CALIB.LBL
+Image:
+https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2113/data/1875228144_1875491141/N1875229393_1_CALIB.IMG</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>{% include tip.html content='Even when there&#8217;s only one result, one needs to pick it out of the list:' %}</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">img_id</span> <span class="o">=</span> <span class="s1">&#39;N1875229393&#39;</span>
+<span class="n">api</span> <span class="o">=</span> <span class="n">OPUS</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">api</span><span class="o">.</span><span class="n">query_image_id</span><span class="p">(</span><span class="n">img_id</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># see index [0] here!</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Found 1 obsids.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Raw:
+Label:
+https://opus.pds-rings.seti.org/holdings/volumes/COISS_2xxx/COISS_2113/data/1875228144_1875491141/N1875229393_1.LBL
+Image:
+https://opus.pds-rings.seti.org/holdings/volumes/COISS_2xxx/COISS_2113/data/1875228144_1875491141/N1875229393_1.IMG
+Calibrated:
+Label:
+https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2113/data/1875228144_1875491141/N1875229393_1_CALIB.LBL
+Image:
+https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2113/data/1875228144_1875491141/N1875229393_1_CALIB.IMG</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>{% include note.html content='Not all ISS images have both raw and calibrated versions on the server.' %}</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The returned object is actually an <code>OPUSOpsID</code>, which just self-displays itself nicely in a notebook.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Downloading">Downloading<a class="anchor-link" href="#Downloading"> </a></h3><p>There is a downloading method, using the <code>obsids</code> attribute's list and automatically storing them in the folder configured in <code>$HOME/.pyciss.toml</code>:</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">api</span><span class="o">.</span><span class="n">download_results</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Downloading N1875229393_1.IMG
+Downloading N1875229393_1.LBL
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;/home/maye/big_drive/planetary_data/pyciss/N1875229393&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 </div>
  
 

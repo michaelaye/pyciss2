@@ -47,7 +47,7 @@ nb_path: "00_io.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_config" class="doc_header"><code>get_config</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L19" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_config</code>()</p>
+<h4 id="get_config" class="doc_header"><code>get_config</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L19" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_config</code>(<strong><code>p</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Read the configfile and return config dict.</p>
 <h2 id="Returns">Returns<a class="anchor-link" href="#Returns"> </a></h2><p>dict
@@ -70,6 +70,35 @@ nb_path: "00_io.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Configfile">Configfile<a class="anchor-link" href="#Configfile"> </a></h2><p>The config file just contains one path to the folder where all data for <code>pyciss</code> will be stored.</p>
+<p>If it doesn't exist yet, the following code helps you to create it.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">IOError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">get_config</span><span class="p">()</span>  <span class="c1"># should throw above IOError when these</span>
+<span class="k">assert</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="sa">f</span><span class="s2">&quot;Config file </span><span class="si">{</span><span class="n">configpath</span><span class="si">}</span><span class="s2"> not found.&quot;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -88,7 +117,7 @@ nb_path: "00_io.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="set_database_path" class="doc_header"><code>set_database_path</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L45" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>set_database_path</code>(<strong><code>dbfolder</code></strong>)</p>
+<h4 id="set_database_path" class="doc_header"><code>set_database_path</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L47" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>set_database_path</code>(<strong><code>dbfolder</code></strong>)</p>
 </blockquote>
 <p>Use to write the database path into the config.</p>
 <h2 id="Parameters">Parameters<a class="anchor-link" href="#Parameters"> </a></h2><p>dbfolder : str or pathlib.Path
@@ -114,6 +143,25 @@ nb_path: "00_io.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># tmpdir = tempfile.TemporaryDirectory()</span>
+
+<span class="c1"># set_database_path(tmpdir)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
 <div class="output">
@@ -122,7 +170,7 @@ nb_path: "00_io.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_db_root" class="doc_header"><code>get_db_root</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L63" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_db_root</code>()</p>
+<h4 id="get_db_root" class="doc_header"><code>get_db_root</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L65" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_db_root</code>()</p>
 </blockquote>
 <p>Read dbroot folder from config and mkdir if required.</p>
 
@@ -154,7 +202,7 @@ nb_path: "00_io.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="db_mapped_cubes" class="doc_header"><code>db_mapped_cubes</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L71" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>db_mapped_cubes</code>()</p>
+<h4 id="db_mapped_cubes" class="doc_header"><code>db_mapped_cubes</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L73" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>db_mapped_cubes</code>()</p>
 </blockquote>
 
 </div>
@@ -178,7 +226,7 @@ nb_path: "00_io.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="db_label_paths" class="doc_header"><code>db_label_paths</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L75" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>db_label_paths</code>()</p>
+<h4 id="db_label_paths" class="doc_header"><code>db_label_paths</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L77" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>db_label_paths</code>()</p>
 </blockquote>
 
 </div>
@@ -242,7 +290,7 @@ nb_path: "00_io.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="PathManager" class="doc_header"><code>class</code> <code>PathManager</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L79" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>PathManager</code>(<strong><code>img_id</code></strong>, <strong><code>savedir</code></strong>=<em><code>None</code></em>)</p>
+<h2 id="PathManager" class="doc_header"><code>class</code> <code>PathManager</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L83" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>PathManager</code>(<strong><code>img_id</code></strong>, <strong><code>savedir</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Manage paths to data in database.</p>
 <p>The <code>.pyciss.toml</code> config file determines the path to the database for ISS images.
@@ -296,7 +344,7 @@ undestriped</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="DBManager" class="doc_header"><code>class</code> <code>DBManager</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L201" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DBManager</code>()</p>
+<h2 id="DBManager" class="doc_header"><code>class</code> <code>DBManager</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L205" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DBManager</code>()</p>
 </blockquote>
 
 </div>

@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 configpath = Path.home() / '.pyciss.toml'
 
 # Cell
-def get_config():
+def get_config(p=None):
     """Read the configfile and return config dict.
 
     Returns
@@ -24,10 +24,12 @@ def get_config():
     dict
         Dictionary with the content of the configpath file.
     """
-    if not configpath.exists():
-        raise IOError("Config file {} not found.".format(str(configpath)))
+    if p is None:
+        p = configpath
+    if not p.exists():
+        raise IOError("Config file {} not found.".format(str(p)))
     else:
-        with open(configpath) as f:
+        with open(p) as f:
             config = toml.load(f)
         return config
 
@@ -76,6 +78,8 @@ def db_label_paths():
     return get_db_root().glob("*.LBL")
 
 # Cell
+from collections import OrderedDict
+
 class PathManager:
 
     """Manage paths to data in database.
