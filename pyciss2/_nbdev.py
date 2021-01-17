@@ -2,7 +2,7 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"logger": "00_io.ipynb",
+index = {"logger": "02_pipeline.ipynb",
          "configpath": "00_io.ipynb",
          "get_config": "00_io.ipynb",
          "set_database_path": "00_io.ipynb",
@@ -21,7 +21,8 @@ index = {"logger": "00_io.ipynb",
          "OPUS": "01_opusapi.ipynb"}
 
 modules = ["io.py",
-           "opusapi.py"]
+           "opusapi.py",
+           "pipeline.py"]
 
 doc_url = "https://michaelaye.github.io/pyciss2/"
 

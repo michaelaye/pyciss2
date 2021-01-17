@@ -16,6 +16,9 @@ entries:
       title: OPUSAPI
       url: opusapi.html
     - output: web,pdf
+      title: pipeline
+      url: pipeline.html
+    - output: web,pdf
       title: Title
       url: to_be_implemented.html
     output: web
