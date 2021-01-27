@@ -36,6 +36,14 @@ nb_path: "00_io.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Configfile">Configfile<a class="anchor-link" href="#Configfile"> </a></h2><p>The config file just contains one path to the folder where all data for <code>pyciss</code> will be stored.</p>
+<p>If it doesn't exist yet, the following code helps you to create it.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -47,10 +55,10 @@ nb_path: "00_io.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_config" class="doc_header"><code>get_config</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L19" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_config</code>(<strong><code>p</code></strong>=<em><code>None</code></em>)</p>
+<h2 id="Config" class="doc_header"><code>class</code> <code>Config</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L17" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Config</code>(<strong><code>other_config</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
-<p>Read the configfile and return config dict.</p>
-<h2 id="Returns">Returns<a class="anchor-link" href="#Returns"> </a></h2><p>dict
+<p>Manage config stuff.</p>
+<h2 id="Attributes">Attributes<a class="anchor-link" href="#Attributes"> </a></h2><p>dict
     Dictionary with the content of the configpath file.</p>
 
 </div>
@@ -70,14 +78,13 @@ nb_path: "00_io.ipynb"
 </div>
     {% endraw %}
 
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Configfile">Configfile<a class="anchor-link" href="#Configfile"> </a></h2><p>The config file just contains one path to the folder where all data for <code>pyciss</code> will be stored.</p>
-<p>If it doesn't exist yet, the following code helps you to create it.</p>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
-</div>
-</div>
+    {% endraw %}
+
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -85,9 +92,7 @@ nb_path: "00_io.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastcore.test</span> <span class="kn">import</span> <span class="n">test_fail</span>
-
-<span class="n">test_fail</span><span class="p">(</span><span class="n">get_config</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Config file </span><span class="si">{</span><span class="n">configpath</span><span class="si">}</span><span class="s2"> not found.&quot;</span><span class="p">)</span>  <span class="c1"># should throw above IOError when these</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">config</span><span class="o">.</span><span class="n">archive_path</span>
 </pre></div>
 
     </div>
@@ -99,24 +104,12 @@ nb_path: "00_io.ipynb"
 
 <div class="output_area">
 
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">AssertionError</span>                            Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-7-a9e1591019f5&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-green-fg">from</span> fastcore<span class="ansi-blue-fg">.</span>test <span class="ansi-green-fg">import</span> test_fail
-<span class="ansi-green-intense-fg ansi-bold">      2</span> 
-<span class="ansi-green-fg">----&gt; 3</span><span class="ansi-red-fg"> </span>test_fail<span class="ansi-blue-fg">(</span>get_config<span class="ansi-blue-fg">,</span> msg<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">f&#34;Config file {configpath} not found.&#34;</span><span class="ansi-blue-fg">)</span>  <span class="ansi-red-fg"># should throw above IOError when these</span>
 
-<span class="ansi-green-fg">~/miniconda3/envs/py38/lib/python3.8/site-packages/fastcore/test.py</span> in <span class="ansi-cyan-fg">test_fail</span><span class="ansi-blue-fg">(f, msg, contains)</span>
-<span class="ansi-green-intense-fg ansi-bold">     17</span>         <span class="ansi-green-fg">assert</span> <span class="ansi-green-fg">not</span> contains <span class="ansi-green-fg">or</span> contains <span class="ansi-green-fg">in</span> str<span class="ansi-blue-fg">(</span>e<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     18</span>         <span class="ansi-green-fg">return</span>
-<span class="ansi-green-fg">---&gt; 19</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">assert</span> <span class="ansi-green-fg">False</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">f&#34;Expected exception but none raised. {msg}&#34;</span>
-<span class="ansi-green-intense-fg ansi-bold">     20</span> 
-<span class="ansi-green-intense-fg ansi-bold">     21</span> <span class="ansi-red-fg"># Cell</span>
 
-<span class="ansi-red-fg">AssertionError</span>: Expected exception but none raised. Config file /home/maye/.pyciss.toml not found.</pre>
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;/home/maye/big_drive/planetary_data/pyciss&#39;</pre>
 </div>
+
 </div>
 
 </div>
@@ -128,6 +121,39 @@ nb_path: "00_io.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastcore.test</span> <span class="kn">import</span> <span class="n">test_fail</span>
+
+<span class="k">def</span> <span class="nf">will_fail</span><span class="p">():</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="s2">&quot;not_existing.txt&quot;</span><span class="p">)</span>
+
+<span class="n">test_fail</span><span class="p">(</span><span class="n">will_fail</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>No configuration file not_existing1.txt found.
+
+Please run `pyciss.io.set_database_path(path)` and provide the path where
+you want to keep your automatically downloaded images.
+`pyciss` will store this path at not_existing1.txt, where you can easily change it later.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
 
 </div>
     {% endraw %}
@@ -143,7 +169,7 @@ nb_path: "00_io.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="set_database_path" class="doc_header"><code>set_database_path</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L47" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>set_database_path</code>(<strong><code>dbfolder</code></strong>)</p>
+<h4 id="set_database_path" class="doc_header"><code>set_database_path</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L56" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>set_database_path</code>(<strong><code>dbfolder</code></strong>, <strong><code>configpath</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Use to write the database path into the config.</p>
 <h2 id="Parameters">Parameters<a class="anchor-link" href="#Parameters"> </a></h2><p>dbfolder : str or pathlib.Path
@@ -173,9 +199,89 @@ nb_path: "00_io.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># tmpdir = tempfile.TemporaryDirectory()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">tempfile</span>
+</pre></div>
 
-<span class="c1"># set_database_path(tmpdir)</span>
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">name</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;/tmp/tmpixmwbut3&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">set_database_path</span><span class="p">(</span><span class="s2">&quot;some_folder&quot;</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Saved database path into /tmp/tmpixmwbut3.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">toml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">)[</span><span class="s1">&#39;archive_path&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;some_folder&quot;</span>
 </pre></div>
 
     </div>
@@ -196,39 +302,7 @@ nb_path: "00_io.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_db_root" class="doc_header"><code>get_db_root</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L65" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_db_root</code>()</p>
-</blockquote>
-<p>Read dbroot folder from config and mkdir if required.</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="db_mapped_cubes" class="doc_header"><code>db_mapped_cubes</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L73" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>db_mapped_cubes</code>()</p>
+<h4 id="get_db_root" class="doc_header"><code>get_db_root</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L75" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_db_root</code>()</p>
 </blockquote>
 
 </div>
@@ -245,6 +319,46 @@ nb_path: "00_io.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">get_db_root</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Path(&#39;/home/maye/big_drive/planetary_data/pyciss&#39;)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
 <div class="output_wrapper">
 <div class="output">
 
@@ -252,7 +366,31 @@ nb_path: "00_io.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="db_label_paths" class="doc_header"><code>db_label_paths</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L77" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>db_label_paths</code>()</p>
+<h4 id="db_mapped_cubes" class="doc_header"><code>db_mapped_cubes</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L81" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>db_mapped_cubes</code>()</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="db_label_paths" class="doc_header"><code>db_label_paths</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L85" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>db_label_paths</code>()</p>
 </blockquote>
 
 </div>
@@ -316,7 +454,7 @@ nb_path: "00_io.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="PathManager" class="doc_header"><code>class</code> <code>PathManager</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L83" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>PathManager</code>(<strong><code>img_id</code></strong>, <strong><code>savedir</code></strong>=<em><code>None</code></em>)</p>
+<h2 id="PathManager" class="doc_header"><code>class</code> <code>PathManager</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L91" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>PathManager</code>(<strong><code>img_id</code></strong>, <strong><code>savedir</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Manage paths to data in database.</p>
 <p>The <code>.pyciss.toml</code> config file determines the path to the database for ISS images.
@@ -370,7 +508,38 @@ undestriped</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="DBManager" class="doc_header"><code>class</code> <code>DBManager</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L205" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DBManager</code>()</p>
+<h2 id="DBManager" class="doc_header"><code>class</code> <code>DBManager</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L213" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DBManager</code>()</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="filename_from_obsid" class="doc_header"><code>filename_from_obsid</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L221" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>filename_from_obsid</code>(<strong><code>obsid</code></strong>)</p>
 </blockquote>
 
 </div>

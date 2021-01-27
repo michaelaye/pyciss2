@@ -4,6 +4,9 @@
     "Input/Output basics for the pyciss2 package": "io.html",
     "OPUSAPI": "opusapi.html",
     "pipeline": "pipeline.html",
+    "Meta": "ringutils.html",
+    "plotting": "plotting.html",
+    "ringcube": "ringcube.html",
     "Title": "to_be_implemented.html"
   }
 }

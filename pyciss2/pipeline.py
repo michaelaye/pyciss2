@@ -11,7 +11,7 @@ from pyciss2 import io
 import subprocess
 
 try:
-    from kalasiris.pysis import (
+    from kalasiris import (
         ciss2isis,
         cisscal,
         dstripe,
@@ -21,12 +21,12 @@ try:
         ringscam2map,
         spiceinit,
         fillgap,
-        ProcessError
     )
 except ImportError:
     print("Cannot load the ISIS system. pipeline module not functional.")
 else:
     ISISDATA = Path(os.environ["ISISDATA"])
-
+    ISISROOT = Path(os.environ["ISISROOT"])
+# from kalasiris.pysis import ProcessError
 
 logger = logging.getLogger("pyciss.pipeline")

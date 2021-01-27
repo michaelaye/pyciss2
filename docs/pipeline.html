@@ -43,6 +43,23 @@ nb_path: "02_pipeline.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">kalasiris.pysis</span> <span class="kn">import</span> <span class="n">ProcessError</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">file_variations</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">extensions</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Create a variation of file names.</span>
 <span class="sd">    Generate a list of variations on a filename by replacing the extension with</span>
@@ -89,7 +106,7 @@ nb_path: "02_pipeline.ipynb"
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">map_path</span> <span class="o">=</span> <span class="n">ISISDATA</span> <span class="o">/</span> <span class="s2">&quot;base/templates/maps/ringcylindrical.map&quot;</span>
+    <span class="n">map_path</span> <span class="o">=</span> <span class="n">ISISROOT</span> <span class="o">/</span> <span class="s2">&quot;appdata/templates/maps/ringcylindrical.map&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">img_name</span><span class="p">,</span> <span class="n">is_ring_data</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">do_map_project</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">final_resolution</span><span class="o">=</span><span class="mi">500</span>
@@ -124,7 +141,6 @@ nb_path: "02_pipeline.ipynb"
         <span class="c1"># calibration, use I/F as units</span>
         <span class="n">cisscal</span><span class="p">(</span><span class="n">from_</span><span class="o">=</span><span class="n">pm</span><span class="o">.</span><span class="n">raw_cub</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="n">pm</span><span class="o">.</span><span class="n">cal_cub</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s2">&quot;I/F&quot;</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;cisscal done.&quot;</span><span class="p">)</span>
-        <span class="n">end</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">cal_cub</span>  <span class="c1"># keep track of last produced path</span>
 
         <span class="c1"># destriping</span>
         <span class="n">dstripe</span><span class="p">(</span><span class="n">from_</span><span class="o">=</span><span class="n">pm</span><span class="o">.</span><span class="n">cal_cub</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="n">pm</span><span class="o">.</span><span class="n">dst_cub</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">)</span>
@@ -236,6 +252,142 @@ nb_path: "02_pipeline.ipynb"
 </pre></div>
 
     </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">img_id</span> <span class="o">=</span> <span class="s1">&#39;N1875229393&#39;</span>
+<span class="n">pm</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">PathManager</span><span class="p">(</span><span class="n">img_id</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pm</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>cal_cub: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1.cal.cub
+calib_img: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1_CALIB.IMG
+calib_label: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1_CALIB.LBL
+cubepath: not found.
+dst_cub: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1.cal.dst.cub
+raw_cub: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1.cub
+raw_image: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1.IMG
+raw_label: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1.LBL
+tif: not found.
+undestriped: not found.</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">calib</span> <span class="o">=</span> <span class="n">Calibrator</span><span class="p">(</span><span class="n">pm</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">calib</span><span class="o">.</span><span class="n">standard_calib</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pm</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>cal_cub: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1.cal.cub
+calib_img: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1_CALIB.IMG
+calib_label: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1_CALIB.LBL
+cubepath: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1.cal.dst.map.cub
+dst_cub: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1.cal.dst.cub
+raw_cub: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1.cub
+raw_image: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1.IMG
+raw_label: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1.LBL
+tif: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1.cal.dst.map.tif
+undestriped: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1.cal.map.cub</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 

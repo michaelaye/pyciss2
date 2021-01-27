@@ -19,6 +19,15 @@ entries:
       title: pipeline
       url: pipeline.html
     - output: web,pdf
+      title: Meta
+      url: ringutils.html
+    - output: web,pdf
+      title: plotting
+      url: plotting.html
+    - output: web,pdf
+      title: ringcube
+      url: ringcube.html
+    - output: web,pdf
       title: Title
       url: to_be_implemented.html
     output: web
