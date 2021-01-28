@@ -21,8 +21,8 @@ class Config:
     -------
     path: pathlib.Path
 
-    The key, value pairs found in the config file become attributes of thi
-    class after initialization.
+    The key, value pairs found in the config file become attributes of the
+    class instance after initialization.
     At minimum, there should be the `archive_path` attribute for storing data
     for this package.
     """
@@ -174,9 +174,7 @@ class PathManager:
 
     def set_attributes(self):
         for k, v in self.extensions.items():
-            path = self.basepath / ("{}_{}{}".format(self.img_id,
-                                                     self.version,
-                                                     v))
+            path = self.basepath / f"{self.img_id}_{self.version}{v}"
             setattr(self, k, path)
 
     def __str__(self):
@@ -205,6 +203,7 @@ def db_label_paths():
 
 # Cell
 class DBManager():
+    """Helper class for the whole archive."""
     def __init__(self):
         self.dbroot = get_db_root()
 

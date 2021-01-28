@@ -8,15 +8,4 @@
 
 ## How to use
 
-Fill me in please! Don't forget code examples:
-
-```python
-1+1
-```
-
-
-
-
-    2
-
-
+First, the `io` module manages the archive, so, upon first import, it will request from the user a path where all data will be archived.
