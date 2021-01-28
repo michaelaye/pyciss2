@@ -10,7 +10,7 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: Input/Output basics for the pyciss2 package
+      title: Input/Output
       url: io.html
     - output: web,pdf
       title: OPUSAPI

@@ -1,7 +1,7 @@
 {
   "pyciss2": {
     "Overview": "/",
-    "Input/Output basics for the pyciss2 package": "io.html",
+    "Input/Output": "io.html",
     "OPUSAPI": "opusapi.html",
     "pipeline": "pipeline.html",
     "Meta": "ringutils.html",
