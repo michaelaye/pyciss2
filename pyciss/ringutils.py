@@ -16,7 +16,7 @@ def get_order(name):
 
 
 def get_resonances():
-    with pr.resource_stream("pyciss2", "data/ring_resonances.csv") as f:
+    with pr.resource_stream("pyciss", "data/ring_resonances.csv") as f:
         resonances = pd.read_csv(f)
     resonances.columns = ["name", "radius", "a_moon", "n", "kappa"]
     resonances = resonances.sort_values(by="radius", ascending=True)
@@ -45,7 +45,7 @@ def get_janus_epimetheus_resonances():
         a, b = reso.split(":")
         return int(a) - int(b)
 
-    fname = pr.resource_filename("pyciss2", "data/ring_janus_epimetheus_resonances.txt")
+    fname = pr.resource_filename("pyciss", "data/ring_janus_epimetheus_resonances.txt")
     with open(fname) as f:
         jan_epi_resonances = pd.read_fwf(
             f, skiprows=15, header=0, widths=w, skipfooter=1

@@ -11,7 +11,7 @@ import pandas as pd
 import requests
 from IPython.display import HTML, display
 
-from pyciss2 import io
+from pyciss import io
 
 # Cell
 base_url = "https://tools.pds-rings.seti.org/opus/api"

@@ -11,8 +11,8 @@ import numpy as np
 from astropy import units as u
 from ipywidgets import fixed, interact
 
-from pyciss2.ringutils import which_epi_janus_resonance, get_all_prime_resonances
-# from pyciss2.ringcube import RingCube
+from .ringutils import which_epi_janus_resonance, get_all_prime_resonances
+# from pyciss.ringcube import RingCube
 
 
 logger = logging.getLogger(__name__)

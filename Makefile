@@ -2,11 +2,11 @@
 SHELL := /bin/bash
 SRC = $(wildcard ./*.ipynb)
 
-all: pyciss2 docs
+all: pyciss docs
 
-pyciss2: $(SRC)
+pyciss: $(SRC)
 	nbdev_build_lib
-	touch pyciss2
+	touch pyciss
 
 sync:
 	nbdev_update_lib

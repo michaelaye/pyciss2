@@ -13,8 +13,8 @@ import pandas as pd
 
 from planetarypy.pdstools.indexes import indexdb
 
-from pyciss2.ringutils import which_epi_janus_resonance, get_all_prime_resonances
-from pyciss2.io import config
+from .ringutils import which_epi_janus_resonance, get_all_prime_resonances
+from .io import config
 
 # Cell
 resonances = get_all_prime_resonances()

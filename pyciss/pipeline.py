@@ -7,7 +7,7 @@ import logging
 import os
 from pathlib import Path
 
-from pyciss2 import io
+from pyciss import io
 import subprocess
 
 try:
