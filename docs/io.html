@@ -54,7 +54,7 @@ nb_path: "00_io.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Config" class="doc_header"><code>class</code> <code>Config</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L17" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Config</code>(<strong><code>other_config</code></strong>=<em><code>None</code></em>)</p>
+<h2 id="Config" class="doc_header"><code>class</code> <code>Config</code><a href="https://github.com/michaelaye/pyciss/tree/master/pyciss/io.py#L17" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Config</code>(<strong><code>other_config</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 <pre><code>Manage config stuff.
@@ -137,7 +137,7 @@ for this package.</code></pre>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The <a href="/pyciss2/io.html#Config"><code>Config</code></a> object init will ask for an input path if the config file is not found or empty:</p>
+<p>The <a href="/pyciss/io.html#Config"><code>Config</code></a> object init will ask for an input path if the config file is not found or empty:</p>
 
 </div>
 </div>
@@ -153,7 +153,7 @@ for this package.</code></pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Config.not_found" class="doc_header"><code>Config.not_found</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L52" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Config.not_found</code>()</p>
+<h4 id="Config.not_found" class="doc_header"><code>Config.not_found</code><a href="https://github.com/michaelaye/pyciss/tree/master/pyciss/io.py#L52" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Config.not_found</code>()</p>
 </blockquote>
 
 <pre><code>Use input to ask user for the archive_path.
@@ -173,7 +173,7 @@ during init.)</code></pre>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>To test this, we need to catch the UI <code>input()</code> call and provide a default output that would be entered as the <code>archive_path</code> into the <a href="/pyciss2/io.html#Config"><code>Config</code></a> object.</p>
+<p>To test this, we need to catch the UI <code>input()</code> call and provide a default output that would be entered as the <code>archive_path</code> into the <a href="/pyciss/io.html#Config"><code>Config</code></a> object.</p>
 <p>First, we create a random temporary file for a new config:</p>
 
 </div>
@@ -203,7 +203,7 @@ during init.)</code></pre>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&#39;/tmp/tmpci8it2h3&#39;</pre>
+<pre>&#39;/tmp/tmp349bqoil&#39;</pre>
 </div>
 
 </div>
@@ -281,7 +281,7 @@ In reality, the user will provide the path to the <code>input</code> prompt:</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_db_root" class="doc_header"><code>get_db_root</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L69" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_db_root</code>()</p>
+<h4 id="get_db_root" class="doc_header"><code>get_db_root</code><a href="https://github.com/michaelaye/pyciss/tree/master/pyciss/io.py#L69" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_db_root</code>()</p>
 </blockquote>
 
 </div>
@@ -336,7 +336,7 @@ In reality, the user will provide the path to the <code>input</code> prompt:</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="PathManager">PathManager<a class="anchor-link" href="#PathManager"> </a></h2><blockquote><p>The <a href="/pyciss2/io.html#PathManager"><code>PathManager</code></a> provides access to the paths in the archive, based on class attributes that reflect the processing level of the file:</p>
+<h2 id="PathManager">PathManager<a class="anchor-link" href="#PathManager"> </a></h2><blockquote><p>The <a href="/pyciss/io.html#PathManager"><code>PathManager</code></a> provides access to the paths in the archive, based on class attributes that reflect the processing level of the file:</p>
 </blockquote>
 
 </div>
@@ -353,7 +353,7 @@ In reality, the user will provide the path to the <code>input</code> prompt:</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="PathManager" class="doc_header"><code>class</code> <code>PathManager</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L77" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>PathManager</code>(<strong><code>img_id</code></strong>, <strong><code>savedir</code></strong>=<em><code>None</code></em>)</p>
+<h2 id="PathManager" class="doc_header"><code>class</code> <code>PathManager</code><a href="https://github.com/michaelaye/pyciss/tree/master/pyciss/io.py#L77" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>PathManager</code>(<strong><code>img_id</code></strong>, <strong><code>savedir</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 <pre><code>Manage paths to data in database.
@@ -419,7 +419,7 @@ undestriped</code></pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="db_mapped_cubes" class="doc_header"><code>db_mapped_cubes</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L197" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>db_mapped_cubes</code>()</p>
+<h4 id="db_mapped_cubes" class="doc_header"><code>db_mapped_cubes</code><a href="https://github.com/michaelaye/pyciss/tree/master/pyciss/io.py#L197" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>db_mapped_cubes</code>()</p>
 </blockquote>
 
 </div>
@@ -443,7 +443,7 @@ undestriped</code></pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="db_label_paths" class="doc_header"><code>db_label_paths</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L201" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>db_label_paths</code>()</p>
+<h4 id="db_label_paths" class="doc_header"><code>db_label_paths</code><a href="https://github.com/michaelaye/pyciss/tree/master/pyciss/io.py#L201" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>db_label_paths</code>()</p>
 </blockquote>
 
 </div>
@@ -729,7 +729,7 @@ These kind of data are in the database: (returning pd.DataFrame)
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="DBManager" class="doc_header"><code>class</code> <code>DBManager</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L205" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DBManager</code>()</p>
+<h2 id="DBManager" class="doc_header"><code>class</code> <code>DBManager</code><a href="https://github.com/michaelaye/pyciss/tree/master/pyciss/io.py#L205" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DBManager</code>()</p>
 </blockquote>
 
 <pre><code>Helper class for the whole archive.</code></pre>
@@ -762,7 +762,7 @@ These kind of data are in the database: (returning pd.DataFrame)
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="filename_from_obsid" class="doc_header"><code>filename_from_obsid</code><a href="https://github.com/michaelaye/pyciss2/tree/master/pyciss2/io.py#L214" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>filename_from_obsid</code>(<strong><code>obsid</code></strong>)</p>
+<h4 id="filename_from_obsid" class="doc_header"><code>filename_from_obsid</code><a href="https://github.com/michaelaye/pyciss/tree/master/pyciss/io.py#L214" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>filename_from_obsid</code>(<strong><code>obsid</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -807,7 +807,8 @@ Converted 01_opusapi.ipynb.
 Converted 02_pipeline.ipynb.
 Converted 03_ringutils.ipynb.
 Converted 04_plotting.ipynb.
-Converted 05_ringcube.ipynb.
+Converted 05_index.ipynb.
+Converted 06_ringcube.ipynb.
 Converted index.ipynb.
 Converted to_be_implemented.ipynb.
 </pre>
