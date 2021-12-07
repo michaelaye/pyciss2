@@ -10,7 +10,6 @@ from urllib.request import unquote, urlretrieve
 import pandas as pd
 import requests
 from IPython.display import HTML, display
-
 from pyciss import io
 
 # Cell
@@ -152,10 +151,7 @@ class OPUSObsID:
 # Cell
 class OPUS:
 
-    """Manage OPUS API requests.
-
-
-    """
+    """Manage OPUS API requests."""
 
     def __init__(self, silent=False):
         self.silent = silent

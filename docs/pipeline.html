@@ -43,12 +43,121 @@ nb_path: "02_pipeline.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">kalasiris.pysis</span> <span class="kn">import</span> <span class="n">ProcessError</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ISISDATA</span>
 </pre></div>
 
     </div>
 </div>
 </div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>PosixPath(&#39;/home/maye/big_drive/isisdata&#39;)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="file_variations" class="doc_header"><code>file_variations</code><a href="https://github.com/michaelaye/pyciss/tree/master/pyciss/pipeline.py#L37" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>file_variations</code>(<strong><code>filename</code></strong>, <strong><code>extensions</code></strong>)</p>
+</blockquote>
+
+<pre><code>Create a variation of file names.
+Generate a list of variations on a filename by replacing the extension with
+a the provided list.
+:param filename: The original file name to use as a base.
+:param extensions: A list of file extensions to generate new filenames.</code></pre>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="Calibrator" class="doc_header"><code>class</code> <code>Calibrator</code><a href="https://github.com/michaelaye/pyciss/tree/master/pyciss/pipeline.py#L48" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Calibrator</code>(<strong><code>img_name</code></strong>, <strong><code>is_ring_data</code></strong>=<em><code>True</code></em>, <strong><code>do_map_project</code></strong>=<em><code>True</code></em>, <strong><code>final_resolution</code></strong>=<em><code>500</code></em>)</p>
+</blockquote>
+
+<pre><code>Calibrate raw Cassini ISS images using ISIS.
+
+ISIS is using an official released version the calibration routine `cisscal`
+that is being developed under IDL, but has been converted to C++ for ISIS.
+I am using the pipeline as described here:
+https://isis.astrogeology.usgs.gov/IsisWorkshop/index.php/Working_with_Cassini_ISS_Data
+It is customary to indicate the pipeline of ISIS apps that a file went through
+with a chain of extensions, e.g. '.cal.dst.map.cub', indicating calibration,
+destriping, and map projection.
+
+Parameters
+----------
+img_name : io.PathManager, pathlib.Path, str
+    Absolute path to image or io.PathManager object with raw_label attribute.
+    If img_name has no attribute `raw_label`, I try to initialize a PathManager
+    with `img_name` to see if I have received an image_id string here.
+    Last thing I try is just a path.
+is_ring_data : bool
+    Switch to tell the Calibrator if its dealing with ringdata.
+    If True, it will check the label for the correct target (required for correct
+    spiceinit and map projection) and will control spice
+do_map_project : bool
+    Switch to control if map projection into ringplane shall occur
+final_resolution : int
+    The map projection radial resolution value to achieve, in units meter per pixel.
+    If not given, an automatic value is being calculated by the ISIS software.
+    This often leads to higher res images than originally performed, using cubic spline
+    interpolation.
+    They look good, but one must be aware of this for interpretation.
+    I usually take a median on all original resolutions
+    of my dataset and set it to that value.</code></pre>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -60,212 +169,7 @@ nb_path: "02_pipeline.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">file_variations</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">extensions</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create a variation of file names.</span>
-<span class="sd">    Generate a list of variations on a filename by replacing the extension with</span>
-<span class="sd">    a the provided list.</span>
-<span class="sd">    :param filename: The original file name to use as a base.</span>
-<span class="sd">    :param extensions: A list of file extensions to generate new filenames.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">ext</span><span class="p">)</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">label</span> <span class="o">+</span> <span class="n">extention</span> <span class="k">for</span> <span class="n">extention</span> <span class="ow">in</span> <span class="n">extensions</span><span class="p">]</span>
-
-
-<span class="k">class</span> <span class="nc">Calibrator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Calibrate raw Cassini ISS images using ISIS.</span>
-
-<span class="sd">    ISIS is using an official released version the calibration routine `cisscal`</span>
-<span class="sd">    that is being developed under IDL, but has been converted to C++ for ISIS.</span>
-<span class="sd">    I am using the pipeline as described here:</span>
-<span class="sd">    https://isis.astrogeology.usgs.gov/IsisWorkshop/index.php/Working_with_Cassini_ISS_Data</span>
-<span class="sd">    It is customary to indicate the pipeline of ISIS apps that a file went through</span>
-<span class="sd">    with a chain of extensions, e.g. &#39;.cal.dst.map.cub&#39;, indicating calibration,</span>
-<span class="sd">    destriping, and map projection.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    img_name : io.PathManager, pathlib.Path, str</span>
-<span class="sd">        Absolute path to image or io.PathManager object with raw_label attribute.</span>
-<span class="sd">        If img_name has no attribute `raw_label`, I try to initialize a PathManager</span>
-<span class="sd">        with `img_name` to see if I have received an image_id string here.</span>
-<span class="sd">        Last thing I try is just a path.</span>
-<span class="sd">    is_ring_data : bool</span>
-<span class="sd">        Switch to tell the Calibrator if its dealing with ringdata.</span>
-<span class="sd">        If True, it will check the label for the correct target (required for correct</span>
-<span class="sd">        spiceinit and map projection) and will control spice</span>
-<span class="sd">    do_map_project : bool</span>
-<span class="sd">        Switch to control if map projection into ringplane shall occur</span>
-<span class="sd">    final_resolution : int</span>
-<span class="sd">        The map projection radial resolution value to achieve, in units meter per pixel.</span>
-<span class="sd">        If not given, an automatic value is being calculated by the ISIS software.</span>
-<span class="sd">        This often leads to higher res images than originally performed, using cubic spline</span>
-<span class="sd">        interpolation.</span>
-<span class="sd">        They look good, but one must be aware of this for interpretation.</span>
-<span class="sd">        I usually take a median on all original resolutions</span>
-<span class="sd">        of my dataset and set it to that value.</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">map_path</span> <span class="o">=</span> <span class="n">ISISROOT</span> <span class="o">/</span> <span class="s2">&quot;appdata/templates/maps/ringcylindrical.map&quot;</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">img_name</span><span class="p">,</span> <span class="n">is_ring_data</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">do_map_project</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">final_resolution</span><span class="o">=</span><span class="mi">500</span>
-    <span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">img_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_img_name</span><span class="p">(</span><span class="n">img_name</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">is_ring_data</span> <span class="o">=</span> <span class="n">is_ring_data</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">do_map_project</span> <span class="o">=</span> <span class="n">do_map_project</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">final_resolution</span> <span class="o">=</span> <span class="n">final_resolution</span>
-
-    <span class="k">def</span> <span class="nf">standard_calib</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">pm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pm</span>  <span class="c1"># save typing</span>
-        <span class="c1"># import PDS into ISIS</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="c1"># use temp file here for fillgap to go to</span>
-            <span class="n">ciss2isis</span><span class="p">(</span><span class="n">from_</span><span class="o">=</span><span class="n">pm</span><span class="o">.</span><span class="n">raw_label</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="s2">&quot;temp.cub&quot;</span><span class="p">)</span>
-        <span class="k">except</span> <span class="n">ProcessError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;At Calibrator.standard_calib()&#39;s ciss2isis:&quot;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ERR:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parameters:</span><span class="se">\n</span><span class="si">{</span><span class="n">pm</span><span class="o">.</span><span class="n">raw_label</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">pm</span><span class="o">.</span><span class="n">raw_cub</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="n">e</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Import to ISIS done.&quot;</span><span class="p">)</span>
-
-        <span class="c1"># fill Hrs pixels from bad importer</span>
-        <span class="n">fillgap</span><span class="p">(</span><span class="n">from_</span><span class="o">=</span><span class="s2">&quot;temp.cub&quot;</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="n">pm</span><span class="o">.</span><span class="n">raw_cub</span><span class="p">,</span> <span class="n">interp</span><span class="o">=</span><span class="s2">&quot;akima&quot;</span><span class="p">)</span>
-        <span class="c1"># check if label fits with data</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_label</span><span class="p">()</span>
-
-        <span class="c1"># initialize spice kernels into label</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">spiceinit</span><span class="p">()</span>
-
-        <span class="c1"># calibration, use I/F as units</span>
-        <span class="n">cisscal</span><span class="p">(</span><span class="n">from_</span><span class="o">=</span><span class="n">pm</span><span class="o">.</span><span class="n">raw_cub</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="n">pm</span><span class="o">.</span><span class="n">cal_cub</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s2">&quot;I/F&quot;</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;cisscal done.&quot;</span><span class="p">)</span>
-
-        <span class="c1"># destriping</span>
-        <span class="n">dstripe</span><span class="p">(</span><span class="n">from_</span><span class="o">=</span><span class="n">pm</span><span class="o">.</span><span class="n">cal_cub</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="n">pm</span><span class="o">.</span><span class="n">dst_cub</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Destriping done.&quot;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_map_project</span><span class="p">:</span>
-            <span class="c1"># destriped</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">map_project</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">dst_cub</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">cubepath</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">create_preview</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">cubepath</span><span class="p">)</span>
-            <span class="c1"># undestriped</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">map_project</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">cal_cub</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">undestriped</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">create_preview</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">undestriped</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-                <span class="s2">&quot;Map projection was skipped.</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="s2">&quot;Set map_project to True if wanted.&quot;</span>
-            <span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">map_project</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">ringscam2map</span><span class="p">(</span>
-                <span class="n">from_</span><span class="o">=</span><span class="n">start</span><span class="p">,</span>
-                <span class="n">to</span><span class="o">=</span><span class="n">end</span><span class="p">,</span>
-                <span class="n">defaultrange</span><span class="o">=</span><span class="s2">&quot;Camera&quot;</span><span class="p">,</span>
-                <span class="nb">map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">map_path</span><span class="p">,</span>
-                <span class="n">pixres</span><span class="o">=</span><span class="s2">&quot;mpp&quot;</span><span class="p">,</span>
-                <span class="n">resolution</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">final_resolution</span><span class="p">,</span>
-            <span class="p">)</span>
-        <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;STDOUT:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;STDERR:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">create_preview</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
-        <span class="c1"># create tif quickview</span>
-        <span class="n">tifname</span> <span class="o">=</span> <span class="n">end</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.tif&quot;</span><span class="p">)</span>
-        <span class="n">isis2std</span><span class="p">(</span><span class="n">from_</span><span class="o">=</span><span class="n">end</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="n">tifname</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;tiff&quot;</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Created tif product: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">tifname</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">spiceinit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Perform either normal spiceinit or one for ringdata.</span>
-
-<span class="sd">        Note how Python name-spacing can distinguish between the method</span>
-<span class="sd">        and the function with the same name. `spiceinit` from the outer</span>
-<span class="sd">        namespace is the one imported from pysis.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">shape</span> <span class="o">=</span> <span class="s2">&quot;ringplane&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_ring_data</span> <span class="k">else</span> <span class="kc">None</span>
-        <span class="n">spiceinit</span><span class="p">(</span><span class="n">from_</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pm</span><span class="o">.</span><span class="n">raw_cub</span><span class="p">,</span> <span class="n">cksmithed</span><span class="o">=</span><span class="s2">&quot;yes&quot;</span><span class="p">,</span> <span class="n">spksmithed</span><span class="o">=</span><span class="s2">&quot;yes&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">shape</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;spiceinit done.&quot;</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">check_label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Check label for target and fix if necessary.</span>
-
-<span class="sd">        Forcing the target name to Saturn here, because some observations of</span>
-<span class="sd">        the rings have moons as a target, but then the standard map projection</span>
-<span class="sd">        onto the Saturn ring plane fails.</span>
-
-<span class="sd">        See also</span>
-<span class="sd">        --------</span>
-<span class="sd">        https://isis.astrogeology.usgs.gov/IsisSupport/index.php/topic,3922.0.html</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_ring_data</span><span class="p">:</span>
-            <span class="k">return</span>
-        <span class="n">targetname</span> <span class="o">=</span> <span class="n">getkey</span><span class="p">(</span>
-            <span class="n">from_</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pm</span><span class="o">.</span><span class="n">raw_cub</span><span class="p">,</span> <span class="n">grp</span><span class="o">=</span><span class="s2">&quot;instrument&quot;</span><span class="p">,</span> <span class="n">keyword</span><span class="o">=</span><span class="s2">&quot;targetname&quot;</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-
-        <span class="k">if</span> <span class="n">targetname</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;saturn&quot;</span><span class="p">:</span>
-            <span class="n">editlab</span><span class="p">(</span>
-                <span class="n">from_</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pm</span><span class="o">.</span><span class="n">raw_cub</span><span class="p">,</span>
-                <span class="n">options</span><span class="o">=</span><span class="s2">&quot;modkey&quot;</span><span class="p">,</span>
-                <span class="n">keyword</span><span class="o">=</span><span class="s2">&quot;TargetName&quot;</span><span class="p">,</span>
-                <span class="n">value</span><span class="o">=</span><span class="s2">&quot;Saturn&quot;</span><span class="p">,</span>
-                <span class="n">grpname</span><span class="o">=</span><span class="s2">&quot;Instrument&quot;</span><span class="p">,</span>
-            <span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">parse_img_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img_name</span><span class="p">):</span>
-        <span class="c1"># Check if img_name is maybe a PathManager object with a `raw_label` attribute:</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="c1"># if img_name is a PathManager:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">img_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">img_name</span><span class="o">.</span><span class="n">raw_label</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">pm</span> <span class="o">=</span> <span class="n">img_name</span>
-        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="c1"># if img_name is just the ID itself:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">pm</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">PathManager</span><span class="p">(</span><span class="n">img_name</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">img_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pm</span><span class="o">.</span><span class="n">raw_label</span><span class="p">)</span>
-            <span class="k">except</span><span class="p">:</span>
-                <span class="c1"># if it&#39;s actually the path:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">img_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">img_name</span><span class="p">)</span>
-                <span class="c1"># PathManager can deal with absolute paths</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">pm</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">PathManager</span><span class="p">(</span><span class="n">img_name</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">remapping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
-        <span class="n">input_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pm</span><span class="o">.</span><span class="n">dst_cub</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pm</span><span class="o">.</span><span class="n">dst_cub</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">pm</span><span class="o">.</span><span class="n">cal_cub</span>
-        <span class="k">if</span> <span class="n">output</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pm</span><span class="o">.</span><span class="n">cubepath</span>
-        <span class="k">elif</span> <span class="ow">not</span> <span class="n">Path</span><span class="p">(</span><span class="n">output</span><span class="p">)</span><span class="o">.</span><span class="n">is_absolute</span><span class="p">():</span>
-            <span class="n">output</span> <span class="o">=</span> <span class="n">input_</span><span class="o">.</span><span class="n">with_name</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Mapping </span><span class="si">%s</span><span class="s2"> to </span><span class="si">%s</span><span class="s2"> to resolution </span><span class="si">%i</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">input_</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">resolution</span><span class="p">)</span>
-        <span class="n">ringscam2map</span><span class="p">(</span>
-            <span class="n">from_</span><span class="o">=</span><span class="n">input_</span><span class="p">,</span>
-            <span class="n">to</span><span class="o">=</span><span class="n">output</span><span class="p">,</span>
-            <span class="nb">map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">map_path</span><span class="p">,</span>
-            <span class="n">pixres</span><span class="o">=</span><span class="s2">&quot;mpp&quot;</span><span class="p">,</span>
-            <span class="n">defaultrange</span><span class="o">=</span><span class="s2">&quot;Camera&quot;</span><span class="p">,</span>
-            <span class="n">resolution</span><span class="o">=</span><span class="n">resolution</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="n">tifname</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.tif&quot;</span><span class="p">)</span>
-        <span class="n">isis2std</span><span class="p">(</span><span class="n">from_</span><span class="o">=</span><span class="n">output</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="n">tifname</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;tiff&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">img_id</span> <span class="o">=</span> <span class="s1">&#39;N1875229393&#39;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">img_id</span> <span class="o">=</span> <span class="s2">&quot;N1875229393&quot;</span>
 <span class="n">pm</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">PathManager</span><span class="p">(</span><span class="n">img_id</span><span class="p">)</span>
 </pre></div>
 
@@ -394,45 +298,10 @@ undestriped: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_
 </div>
     {% endraw %}
 
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nbdev.export</span> <span class="kn">import</span> <span class="n">notebook2script</span><span class="p">;</span> <span class="n">notebook2script</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Converted 00_io.ipynb.
-Converted 01_opusapi.ipynb.
-Converted 02_pipeline.ipynb.
-Converted 03_ringutils.ipynb.
-Converted 04_plotting.ipynb.
-Converted 05_index.ipynb.
-Converted 06_ringcube.ipynb.
-Converted index.ipynb.
-Converted to_be_implemented.ipynb.
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
 </div>
  
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {}, "version_major": 2, "version_minor": 0}
+</script>
 

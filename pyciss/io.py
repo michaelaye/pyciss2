@@ -4,12 +4,13 @@ __all__ = ['logger', 'Config', 'config', 'get_db_root', 'PathManager', 'db_mappe
            'filename_from_obsid']
 
 # Cell
-import toml
 import logging
+import os
 from collections import OrderedDict
 from pathlib import Path
-import os
+
 import pandas as pd
+import toml
 
 logger = logging.getLogger()
 
@@ -26,8 +27,9 @@ class Config:
     At minimum, there should be the `archive_path` attribute for storing data
     for this package.
     """
+
     # This enables a config path location override using env PYCISS_CONFIG
-    path = Path(os.getenv("PYCISS_CONFIG", Path.home() / '.pyciss.toml'))
+    path = Path(os.getenv("PYCISS_CONFIG", Path.home() / ".pyciss.toml"))
 
     def __init__(self, other_config=None):
         "Switch to other config file location with `other_config`."
@@ -74,6 +76,7 @@ def get_db_root():
 # Cell
 from collections import OrderedDict
 
+
 class PathManager:
 
     """Manage paths to data in database.
@@ -113,31 +116,35 @@ class PathManager:
     """
 
     d = {
-        'cubepath': '.cal.dst.map.cub',
-        'cal_cub': '.cal.cub',
-        'dst_cub': '.cal.dst.cub',
-        'raw_cub': '.cub',
-        'raw_label': '.LBL',
-        'raw_image': '.IMG',
-        'calib_img': '_CALIB.IMG',
-        'calib_label': '_CALIB.LBL',
-        'tif': '.cal.dst.map.tif',
-        'undestriped': '.cal.map.cub'
+        "cubepath": ".cal.dst.map.cub",
+        "cal_cub": ".cal.cub",
+        "dst_cub": ".cal.dst.cub",
+        "raw_cub": ".cub",
+        "raw_label": ".LBL",
+        "raw_image": ".IMG",
+        "calib_img": "_CALIB.IMG",
+        "calib_label": "_CALIB.LBL",
+        "tif": ".cal.dst.map.tif",
+        "undestriped": ".cal.map.cub",
     }
     # ordered, sorted by key:
     extensions = OrderedDict(sorted(d.items(), key=lambda t: t[0]))
 
     def __init__(self, img_id, savedir=None):
-        img_id = img_id.upper()
-        self.input_img_id = img_id
-        if Path(img_id).is_absolute():
-            # the split is to remove the _1.IMG or _2.IMG from the path
-            # for the image id.
-            self._id = Path(img_id).name.split('_')[0]
+        try:  # if img_id is a string, meaning the img_id:
+            img_id = img_id.upper()
+        except AttributeError:  # now assuming some kind of path
+            if Path(img_id).is_absolute():
+                # the split is to remove the _1.IMG or _2.IMG from the path
+                # for the image id.
+                self._id = Path(img_id).name.split("_")[0]
+                print(self._id)
+            else:
+                # I'm using only filename until _ for storage
+                # TODO: Could this create a problem?
+                self._id = img_id[:11]
         else:
-            # I'm using only filename until _ for storage
-            # TODO: Could this create a problem?
-            self._id = img_id[:11]
+            self._id = img_id
         if savedir is None:
             self.dbroot = get_db_root()
         else:
@@ -147,15 +154,15 @@ class PathManager:
         self.set_attributes()
 
     def set_version(self):
-        id_ = Path(self.input_img_id).name
+        id_ = Path(self._id).name
         if len(id_) > 11:
-            self.version = id_.split('_')[1].split('.')[0]
+            self.version = id_.split("_")[1].split(".")[0]
         else:
             # if the given id was without version, check if a raw file is in database:
             try:
                 rawpath = next(self.basepath.glob(self.img_id + "_?.IMG")).name
             except StopIteration:
-                self.version = '0'
+                self.version = "0"
             else:
                 self.version = rawpath[12]
 
@@ -180,7 +187,7 @@ class PathManager:
     def __str__(self):
         self.set_version()
         self.set_attributes()  # in case there were changes
-        s = ''
+        s = ""
         for k, v in self.extensions.items():
             s += "{}: ".format(k)
             path = getattr(self, k)
@@ -202,8 +209,9 @@ def db_label_paths():
     return get_db_root().glob("*.LBL")
 
 # Cell
-class DBManager():
+class DBManager:
     """Helper class for the whole archive."""
+
     def __init__(self):
         self.dbroot = get_db_root()
 
@@ -212,5 +220,5 @@ class DBManager():
 
 # Cell
 def filename_from_obsid(obsid):
-    tokens = obsid.split('_')
+    tokens = obsid.split("_")
     return f"{tokens[-1]}{tokens[-2]}"

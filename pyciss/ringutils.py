@@ -8,7 +8,7 @@ import pandas as pd
 import pkg_resources as pr
 from astropy.time import Time
 
-
+# Cell
 def get_order(name):
     ratio = name.split()[1]
     a, b = ratio.split(":")
@@ -109,10 +109,10 @@ def which_epi_janus_resonance(name, time):
         The given name string (either `janus` or `epimetheus`) and attach
         a 1 or 2, as appropriate.
     """
-    t1 = Time('2002-01-21').to_datetime()
+    t1 = Time("2002-01-21").to_datetime()
     delta = Time(time).to_datetime() - t1
     yearfraction = delta.days / 365
     if int(yearfraction / 4) % 2 == 0:
-        return name + '2'
+        return name + "2"
     else:
-        return name + '1'
+        return name + "1"

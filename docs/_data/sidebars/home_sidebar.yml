@@ -19,13 +19,22 @@ entries:
       title: pipeline
       url: pipeline.html
     - output: web,pdf
-      title: Meta
+      title: ringutils
       url: ringutils.html
     - output: web,pdf
       title: plotting
       url: plotting.html
     - output: web,pdf
-      title: ringcube
+      title: ISIS.SPECIALPIXELS
+      url: isis.specialpixels.html
+    - output: web,pdf
+      title: Download
+      url: download.html
+    - output: web,pdf
+      title: ISIS.CUBEFILE
+      url: isis.cubefile.html
+    - output: web,pdf
+      title: RingCube
       url: ringcube.html
     - output: web,pdf
       title: Title

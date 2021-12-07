@@ -4,9 +4,12 @@
     "Input/Output": "io.html",
     "OPUSAPI": "opusapi.html",
     "pipeline": "pipeline.html",
-    "Meta": "ringutils.html",
+    "ringutils": "ringutils.html",
     "plotting": "plotting.html",
-    "ringcube": "ringcube.html",
+    "ISIS.SPECIALPIXELS": "isis.specialpixels.html",
+    "Download": "download.html",
+    "ISIS.CUBEFILE": "isis.cubefile.html",
+    "RingCube": "ringcube.html",
     "Title": "to_be_implemented.html"
   }
 }

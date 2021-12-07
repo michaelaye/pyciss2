@@ -3,19 +3,11 @@
 
 
 ```python
-get_index_dir()
-```
-
-
-
-
-    PosixPath('/home/maye/big_drive/planetary_data/pyciss/indexes')
-
-
-
-```python
 df = ring_summary_index()
 ```
+
+    Stored index is up-to-date.
+
 
 ```python
 df.head()
@@ -77,12 +69,12 @@ df.head()
       <td>10.091212</td>
       <td>205899.335</td>
       <td>1098621.586</td>
-      <td>419.01370</td>
+      <td>419.0137</td>
       <td>...</td>
-      <td>7.087500e+07</td>
+      <td>70874998.947</td>
       <td>284.523</td>
       <td>215.951</td>
-      <td>64.070</td>
+      <td>64.07</td>
       <td>64.589</td>
       <td>115.411</td>
       <td>73.676</td>
@@ -103,10 +95,10 @@ df.head()
       <td>1745689.307</td>
       <td>421.97145</td>
       <td>...</td>
-      <td>7.087085e+07</td>
+      <td>70870851.371</td>
       <td>284.524</td>
       <td>215.951</td>
-      <td>64.070</td>
+      <td>64.07</td>
       <td>64.589</td>
       <td>115.411</td>
       <td>73.676</td>
@@ -122,12 +114,12 @@ df.head()
       <td>36.928066</td>
       <td>37.304334</td>
       <td>9.879593</td>
-      <td>10.250110</td>
+      <td>10.25011</td>
       <td>1042341.438</td>
-      <td>2186830.920</td>
+      <td>2186830.92</td>
       <td>414.79041</td>
       <td>...</td>
-      <td>7.086670e+07</td>
+      <td>70866703.094</td>
       <td>284.524</td>
       <td>215.951</td>
       <td>64.071</td>
@@ -143,15 +135,15 @@ df.head()
       <td>COISS_2001</td>
       <td>data/1454725799_1455008789/N1454728139_1.LBL</td>
       <td>co-iss-n1454728139</td>
-      <td>28.100420</td>
+      <td>28.10042</td>
       <td>28.479618</td>
       <td>6.224709</td>
       <td>6.601574</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>&lt;NA&gt;</td>
+      <td>&lt;NA&gt;</td>
+      <td>&lt;NA&gt;</td>
       <td>...</td>
-      <td>7.086256e+07</td>
+      <td>70862557.207</td>
       <td>284.524</td>
       <td>215.951</td>
       <td>64.071</td>
@@ -175,7 +167,7 @@ df.head()
       <td>3905151.343</td>
       <td>405.91234</td>
       <td>...</td>
-      <td>7.085841e+07</td>
+      <td>70858406.794</td>
       <td>284.525</td>
       <td>215.951</td>
       <td>64.071</td>
@@ -194,27 +186,17 @@ df.head()
 
 
 ```python
-read_ring_images_index().info()
-```
-
-    <class 'pandas.core.frame.DataFrame'>
-    Int64Index: 117692 entries, 2321 to 407222
-    Columns: 140 entries, FILE_NAME to STANDARD_DATA_PRODUCT_ID
-    dtypes: datetime64[ns](7), float64(70), int64(20), object(43)
-    memory usage: 126.6+ MB
-
-
-```python
 clearnacs = get_clearnacs_ring_images()
 clearnacs.info()
 ```
 
+    Stored index is up-to-date.
     'isotime' column does not exist. Leaving index as it is.
     <class 'pandas.core.frame.DataFrame'>
-    Int64Index: 73271 entries, 2321 to 407222
+    Int64Index: 13406 entries, 2321 to 100442
     Columns: 140 entries, FILE_NAME to STANDARD_DATA_PRODUCT_ID
-    dtypes: datetime64[ns](7), float64(70), int64(20), object(43)
-    memory usage: 78.8+ MB
+    dtypes: Float64(68), Int64(22), datetime64[ns](7), string(43)
+    memory usage: 15.6 MB
 
 
 ```python
@@ -222,23 +204,8 @@ filter_for_ringspan(clearnacs, 500).info()
 ```
 
     <class 'pandas.core.frame.DataFrame'>
-    Int64Index: 134 entries, 13326 to 398037
+    Int64Index: 44 entries, 13326 to 13370
     Columns: 140 entries, FILE_NAME to STANDARD_DATA_PRODUCT_ID
-    dtypes: datetime64[ns](7), float64(70), int64(20), object(43)
-    memory usage: 147.6+ KB
-
-
-```python
-from nbdev.export import notebook2script; notebook2script()
-```
-
-    Converted 00_io.ipynb.
-    Converted 01_opusapi.ipynb.
-    Converted 02_pipeline.ipynb.
-    Converted 03_ringutils.ipynb.
-    Converted 04_plotting.ipynb.
-    Converted 05_index.ipynb.
-    Converted 06_ringcube.ipynb.
-    Converted index.ipynb.
-    Converted to_be_implemented.ipynb.
+    dtypes: Float64(68), Int64(22), datetime64[ns](7), string(43)
+    memory usage: 52.3 KB
 
