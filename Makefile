@@ -21,11 +21,12 @@ docs: $(SRC)
 test:
 	nbdev_test_nbs
 
-release: pypi conda_release
-	nbdev_bump_version
+release: pypi
+	fastrelease_conda_package --mambabuild --upload_user michaelaye
+	fastrelease_bump_version
 
 conda_release:
-	fastrelease_conda_package
+	fastrelease_conda_package --mambabuild --upload_user michaelaye
 
 pypi: dist
 	twine upload --repository pypi dist/*

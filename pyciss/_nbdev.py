@@ -3,9 +3,6 @@
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"logger": "09_ringcube.ipynb",
-         "Config": "00_io.ipynb",
-         "config": "00_io.ipynb",
-         "get_db_root": "00_io.ipynb",
          "PathManager": "00_io.ipynb",
          "db_mapped_cubes": "00_io.ipynb",
          "db_label_paths": "00_io.ipynb",

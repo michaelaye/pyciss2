@@ -36,55 +36,6 @@ nb_path: "00_io.ipynb"
 </div>
     {% endraw %}
 
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Configfile">Configfile<a class="anchor-link" href="#Configfile"> </a></h2><p>The config file for now just contains one path to the folder where all data for <code>pyciss</code> will be stored.</p>
-
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h2 id="Config" class="doc_header"><code>class</code> <code>Config</code><a href="https://github.com/michaelaye/pyciss/tree/master/pyciss/io.py#L18" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Config</code>(<strong><code>other_config</code></strong>=<em><code>None</code></em>)</p>
-</blockquote>
-
-<pre><code>Manage config stuff.
-
-Attributes
--------
-path: pathlib.Path
-
-The key, value pairs found in the config file become attributes of the
-class instance after initialization.
-At minimum, there should be the `archive_path` attribute for storing data
-for this package.</code></pre>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -92,24 +43,8 @@ for this package.</code></pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">config</span><span class="o">.</span><span class="n">archive_path</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">planetarypy.ciss</span> <span class="kn">import</span> <span class="n">storage_root</span>
+<span class="n">storage_root</span>
 </pre></div>
 
     </div>
@@ -124,207 +59,7 @@ for this package.</code></pre>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&#39;/home/maye/big_drive/planetary_data/pyciss&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The <a href="/pyciss/io.html#Config"><code>Config</code></a> object init will ask for an input path if the config file is not found or empty:</p>
-
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="Config.not_found" class="doc_header"><code>Config.not_found</code><a href="https://github.com/michaelaye/pyciss/tree/master/pyciss/io.py#L54" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Config.not_found</code>()</p>
-</blockquote>
-
-<pre><code>Use input to ask user for the archive_path.
-
-The path will be stored in the config file `Class.path` (either default or as given
-during init.)</code></pre>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>To test this, we need to catch the UI <code>input()</code> call and provide a default output that would be entered as the <code>archive_path</code> into the <a href="/pyciss/io.html#Config"><code>Config</code></a> object.</p>
-<p>First, we create a random temporary file for a new config:</p>
-
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">tempfile</span>
-
-<span class="n">f</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">()</span>
-<span class="n">f</span><span class="o">.</span><span class="n">name</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;/tmp/tmp349bqoil&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Now we store the pointer to the <code>input</code> function as a backup, and patch the <code>input</code> function to return a test archive_path:</p>
-
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">old_input</span> <span class="o">=</span> <span class="nb">input</span>
-<span class="c1"># patch input function for testing</span>
-<span class="nb">input</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s2">&quot;/some/path&quot;</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Now we create a new Config object. As it has no archive path in it, the patched <code>input</code> call of <code>Class.not_found</code> will return the above test path.
-In reality, the user will provide the path to the <code>input</code> prompt:</p>
-
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-
-<span class="k">assert</span> <span class="n">toml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">)[</span><span class="s2">&quot;archive_path&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;/some/path&quot;</span>
-
-<span class="c1"># return stored pointer to the input function:</span>
-<span class="nb">input</span> <span class="o">=</span> <span class="n">old_input</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_db_root" class="doc_header"><code>get_db_root</code><a href="https://github.com/michaelaye/pyciss/tree/master/pyciss/io.py#L71" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_db_root</code>()</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">get_db_root</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>Path(&#39;/home/maye/big_drive/planetary_data/pyciss&#39;)</pre>
+<pre>Path(&#39;/home/maye/big_drive/planetary_data/missions/cassini/iss&#39;)</pre>
 </div>
 
 </div>
@@ -354,20 +89,20 @@ In reality, the user will provide the path to the <code>input</code> prompt:</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="PathManager" class="doc_header"><code>class</code> <code>PathManager</code><a href="https://github.com/michaelaye/pyciss/tree/master/pyciss/io.py#L80" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>PathManager</code>(<strong><code>img_id</code></strong>, <strong><code>savedir</code></strong>=<em><code>None</code></em>)</p>
+<h2 id="PathManager" class="doc_header"><code>class</code> <code>PathManager</code><a href="https://github.com/michaelaye/pyciss/tree/master/pyciss/io.py#L19" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>PathManager</code>(<strong><code>img_id</code></strong>, <strong><code>savedir</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 <pre><code>Manage paths to data in database.
 
-The `.pyciss.toml` config file determines the path to the database for ISS images.
-With this class you can access the different kind of files conveniently.
+`planetarypy.ciss.storage_root` determines the path to the database for ISS images.
+With this class you can access the different kind of files in that folder conveniently.
 
 Using the stored extensions dictionary, the attributes of the object listed here are created
 dynamically at object initialization and when the image_id is being set.
 
 NOTE
 ----
-This class will read the .pyciss.toml to define the dbroot path, but
+This class will use the archive path as designated by `planetarypy.ciss`, but
 one can also call it with the savedir argument to override that.
 
 Parameters
@@ -376,8 +111,8 @@ img_id : str or pathlib.Path
     The N... or W... image identifier string of CISS images or the absolute
     path to an existing image
 savedir : str or pathlib.Path
-    Path to the pyciss image database. By default defined by what's found in
-    the .pyciss.yaml config, but can be overridden using this parameter.
+    Path to the pyciss image database. By default defined by what's given by
+    `planetarypy.ciss.storage_root`, but can be overridden using this parameter.
 
 Attributes
 ----------
@@ -420,7 +155,7 @@ undestriped</code></pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="db_mapped_cubes" class="doc_header"><code>db_mapped_cubes</code><a href="https://github.com/michaelaye/pyciss/tree/master/pyciss/io.py#L204" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>db_mapped_cubes</code>()</p>
+<h4 id="db_mapped_cubes" class="doc_header"><code>db_mapped_cubes</code><a href="https://github.com/michaelaye/pyciss/tree/master/pyciss/io.py#L143" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>db_mapped_cubes</code>()</p>
 </blockquote>
 
 </div>
@@ -444,7 +179,7 @@ undestriped</code></pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="db_label_paths" class="doc_header"><code>db_label_paths</code><a href="https://github.com/michaelaye/pyciss/tree/master/pyciss/io.py#L208" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>db_label_paths</code>()</p>
+<h4 id="db_label_paths" class="doc_header"><code>db_label_paths</code><a href="https://github.com/michaelaye/pyciss/tree/master/pyciss/io.py#L147" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>db_label_paths</code>()</p>
 </blockquote>
 
 </div>
@@ -471,7 +206,7 @@ undestriped</code></pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">db_mapped_cubes</span><span class="p">())</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">db_mapped_cubes</span><span class="p">())[:</span><span class="mi">5</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -483,22 +218,16 @@ undestriped</code></pre>
 
 <div class="output_area">
 
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-3-56ca4fe3b74d&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>list<span class="ansi-blue-fg">(</span>db_mapped_cubes<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
 
-<span class="ansi-green-fg">&lt;ipython-input-2-75ce33351915&gt;</span> in <span class="ansi-cyan-fg">db_mapped_cubes</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-red-fg">#export</span>
-<span class="ansi-green-intense-fg ansi-bold">      2</span> <span class="ansi-green-fg">def</span> db_mapped_cubes<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">----&gt; 3</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">return</span> get_db_root<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>glob<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;**/*cal.dst.map.cub&#34;</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span> 
-<span class="ansi-green-intense-fg ansi-bold">      5</span> 
 
-<span class="ansi-red-fg">NameError</span>: name &#39;get_db_root&#39; is not defined</pre>
+<div class="output_text output_subarea output_execute_result">
+<pre>[Path(&#39;/home/maye/big_drive/planetary_data/missions/cassini/iss/N1595341067/N1595341067_1.cal.dst.map.cub&#39;),
+ Path(&#39;/home/maye/big_drive/planetary_data/missions/cassini/iss/N1625954542/N1625954542_1.cal.dst.map.cub&#39;),
+ Path(&#39;/home/maye/big_drive/planetary_data/missions/cassini/iss/N1625962190/N1625962190_1.cal.dst.map.cub&#39;),
+ Path(&#39;/home/maye/big_drive/planetary_data/missions/cassini/iss/N1591681327/N1591681327_1.cal.dst.map.cub&#39;),
+ Path(&#39;/home/maye/big_drive/planetary_data/missions/cassini/iss/N1585780709/N1585780709_1.cal.dst.map.cub&#39;)]</pre>
 </div>
+
 </div>
 
 </div>
@@ -546,16 +275,16 @@ undestriped</code></pre>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>cal_cub: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1.cal.cub
-calib_img: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1_CALIB.IMG
-calib_label: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1_CALIB.LBL
-cubepath: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1.cal.dst.map.cub
-dst_cub: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1.cal.dst.cub
-raw_cub: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1.cub
-raw_image: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1.IMG
-raw_label: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1.LBL
-tif: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1.cal.dst.map.tif
-undestriped: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_1.cal.map.cub</pre>
+<pre>cal_cub: /home/maye/big_drive/planetary_data/missions/cassini/iss/N1875229393/N1875229393_1.cal.cub
+calib_img: /home/maye/big_drive/planetary_data/missions/cassini/iss/N1875229393/N1875229393_1_CALIB.IMG
+calib_label: /home/maye/big_drive/planetary_data/missions/cassini/iss/N1875229393/N1875229393_1_CALIB.LBL
+cubepath: /home/maye/big_drive/planetary_data/missions/cassini/iss/N1875229393/N1875229393_1.cal.dst.map.cub
+dst_cub: /home/maye/big_drive/planetary_data/missions/cassini/iss/N1875229393/N1875229393_1.cal.dst.cub
+raw_cub: /home/maye/big_drive/planetary_data/missions/cassini/iss/N1875229393/N1875229393_1.cub
+raw_image: /home/maye/big_drive/planetary_data/missions/cassini/iss/N1875229393/N1875229393_1.IMG
+raw_label: /home/maye/big_drive/planetary_data/missions/cassini/iss/N1875229393/N1875229393_1.LBL
+tif: /home/maye/big_drive/planetary_data/missions/cassini/iss/N1875229393/N1875229393_1.cal.dst.map.tif
+undestriped: /home/maye/big_drive/planetary_data/missions/cassini/iss/N1875229393/N1875229393_1.cal.map.cub</pre>
 </div>
 
 </div>
@@ -623,7 +352,7 @@ undestriped: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_
 <span class="sd">    pd.DataFrame</span>
 <span class="sd">        Table with the found data items per type.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">dbroot</span> <span class="o">=</span> <span class="n">get_db_root</span><span class="p">()</span>
+    <span class="n">dbroot</span> <span class="o">=</span> <span class="n">storage_root</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Database location: </span><span class="si">{</span><span class="n">dbroot</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">n_ids</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">dbroot</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;[N,W]*&quot;</span><span class="p">)))</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of WACs and NACs in database: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_ids</span><span class="p">))</span>
@@ -661,8 +390,8 @@ undestriped: /home/maye/big_drive/planetary_data/pyciss/N1875229393/N1875229393_
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Database location: /home/maye/big_drive/planetary_data/pyciss
-Number of WACs and NACs in database: 1
+<pre>Database location: /home/maye/big_drive/planetary_data/missions/cassini/iss
+Number of WACs and NACs in database: 24
 These kind of data are in the database: (returning pd.DataFrame)
 </pre>
 </div>
@@ -705,16 +434,16 @@ These kind of data are in the database: (returning pd.DataFrame)
   <tbody>
     <tr>
       <th>0</th>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
+      <td>23</td>
+      <td>3</td>
+      <td>2</td>
+      <td>23</td>
+      <td>23</td>
+      <td>23</td>
+      <td>24</td>
+      <td>24</td>
+      <td>23</td>
+      <td>23</td>
     </tr>
   </tbody>
 </table>
@@ -740,7 +469,7 @@ These kind of data are in the database: (returning pd.DataFrame)
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="DBManager" class="doc_header"><code>class</code> <code>DBManager</code><a href="https://github.com/michaelaye/pyciss/tree/master/pyciss/io.py#L212" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DBManager</code>()</p>
+<h2 id="DBManager" class="doc_header"><code>class</code> <code>DBManager</code><a href="https://github.com/michaelaye/pyciss/tree/master/pyciss/io.py#L151" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DBManager</code>()</p>
 </blockquote>
 
 <pre><code>Helper class for the whole archive.</code></pre>
@@ -773,7 +502,7 @@ These kind of data are in the database: (returning pd.DataFrame)
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="filename_from_obsid" class="doc_header"><code>filename_from_obsid</code><a href="https://github.com/michaelaye/pyciss/tree/master/pyciss/io.py#L222" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>filename_from_obsid</code>(<strong><code>obsid</code></strong>)</p>
+<h4 id="filename_from_obsid" class="doc_header"><code>filename_from_obsid</code><a href="https://github.com/michaelaye/pyciss/tree/master/pyciss/io.py#L161" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>filename_from_obsid</code>(<strong><code>obsid</code></strong>)</p>
 </blockquote>
 
 </div>
